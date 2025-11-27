@@ -90,10 +90,8 @@ Aspiring **Platform & Cloud Engineer** with practical experience across automati
 
 ---
 
-## 📬 Contact  
-
-- **GitHub:** *your GitHub link here*  
-- **LinkedIn:** *your LinkedIn link here*  
+## 📬 Contact    
+- **LinkedIn:** https://www.linkedin.com/in/warsame-hussein/
 
 ---
 
