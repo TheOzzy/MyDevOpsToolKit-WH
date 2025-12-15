@@ -1,1 +1,25 @@
+Level 1 (Bandit0) - password in readme is - ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+
+Level 2 (Bandit1) - password in '-' is - 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+
+When using '-' files, using the './' then the file name, './-' will provide the action to the file
+therefore, 'cat ./-' would display the contents of the file.
+
+Level 3 (Bandit2) - password in '--spaces in this filename--' - MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+
+Spaces in-between file names will need '\', therefore the above file name would be entered into the terminal like this, cat ./--spaces\ in\ this\ filename--
+
+Level 4 (Bandit3) - password in '...Hiding-From-You' - 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+
+Using the what I used above 'cat ./' with the complete command being 'cat ./...Hiding-From-You', finding hidden directories use the following command, 'ls -a' this will list all files and directories even if they're hidden.
+
+Level 5 (Bandit4) - password in '-file07' - 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+
+Used the following command 'cat./file' changing the number as the files are numbered from 00 - 09, until I found the password.
+
+        - MUST BE A QUICKER WAY TO FIND THE PASSWORD, FURTHER INVESTIGATION IS REQUIRED!
+
+Level 6 (Bandit5) - password in '/maybehere07/.file3' - HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+
+Used ls -la [directory name] E.G. 'ls -la maybehere07', listed all the files and found that the file had a byte size of 1033, not-executable.
 
