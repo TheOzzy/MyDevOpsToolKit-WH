@@ -23,7 +23,7 @@ Level 6 (Bandit5) - password in '/maybehere07/.file3' - HWasnPhtq9AVKe0dmk45nxy2
 
 Used ls -la [directory name] E.G. 'ls -la maybehere07', listed all the files and found that the file had a byte size of 1033, not-executable.
 
-Level 7 (Bandit6) - morbNTDkSW6jIluc0ymOdMaLnOlFVAaj
+Level 7 (Bandit6) - morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
 
 Using the command find and setting some set conditions I was able to find the right file based on group,user and size requirements
 
