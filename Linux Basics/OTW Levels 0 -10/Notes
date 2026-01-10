@@ -23,3 +23,10 @@ Level 6 (Bandit5) - password in '/maybehere07/.file3' - HWasnPhtq9AVKe0dmk45nxy2
 
 Used ls -la [directory name] E.G. 'ls -la maybehere07', listed all the files and found that the file had a byte size of 1033, not-executable.
 
+Level 7 (Bandit6) - morbNTDkSW6jIluc0ymOdMaLnOlFVAaj
+
+Using the command find and setting some set conditions I was able to find the right file based on group,user and size requirements
+
+the full command was " find / -type f -user bandit7 -group bandit 6 -size 33c 2>/dev/null "
+This command provided the exact path to the file - "/var/lib/dpkg/info/badnit7.password"
+using the "cd" command to the file and using the "cat" command - "cat bandit7.password" to retieve the password.
