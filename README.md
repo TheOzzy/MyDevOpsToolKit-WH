@@ -64,26 +64,6 @@ This repository supports my journey toward becoming a Platform / DevOps Engineer
 
 ---
 
-## 📌 Featured Project (Coming Soon)  
-### **Automated IT Ticketing & RAG Monitoring System**
-
-Originally built at Capgemini using:  
-- Power Automate  
-- SharePoint  
-- Power BI  
-- Planner  
-
-Now being rebuilt with:  
-- **PostgreSQL**  
-- **Python**  
-- **Docker**  
-- **Terraform** (future)  
-- **GitHub Actions** for automation  
-
-A full write-up will be added as development progresses.
-
----
-
 ## 👨‍💻 About Me  
 
 Aspiring **Platform & Cloud Engineer** with practical experience across automation, cloud workflows, Linux, and system support. Passionate about DevOps culture, reliability engineering, developer experience, and building tools that make teams faster.
