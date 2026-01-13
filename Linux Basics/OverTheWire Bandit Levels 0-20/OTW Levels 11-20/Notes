@@ -1,0 +1,9 @@
+Level12(Bandit11-12) password in data.txt - 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+
+I displayed the contents of the "data.txt" file by using "cat data.txt" with this command the output is - "Gur cnffjbeq vf 7k16JArUVv5LxVuJfsSVdbbtaHGlw9D4", this is encrypted using the "ROT13" encryption. user can encrypt any information using the following command "tr 'A-Za-z' 'N-ZA-Mn-za-m' <<< "example text to be encrypted"
+
+the command "tr 'A-Za-z' 'N-ZA-Mn-za-m'" can also be used to decrypt ROT13 encrypted, here is the complete command I used to get the answer "tr 'A-Za-z' 'N-ZA-Mn-za-m' <<< Gur cnffjbeq vf 7k16JArUVv5LxVuJfsSVdbbtaHGlw9D4" the output of the command was "The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4".
+
+ROT13 Wikipedia Page - https://en.wikipedia.org/wiki/ROT13#Emacs_and_Vim
+
+
