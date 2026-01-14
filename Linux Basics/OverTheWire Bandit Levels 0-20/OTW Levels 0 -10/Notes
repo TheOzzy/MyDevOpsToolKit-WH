@@ -1,0 +1,49 @@
+Level 1 (Bandit0) - password in readme is - ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+
+Level 2 (Bandit1) - password in '-' is - 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+
+When using '-' files, using the './' then the file name, './-' will provide the action to the file
+therefore, 'cat ./-' would display the contents of the file.
+
+Level 3 (Bandit2) - password in '--spaces in this filename--' - MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+
+Spaces in-between file names will need '\', therefore the above file name would be entered into the terminal like this, cat ./--spaces\ in\ this\ filename--
+
+Level 4 (Bandit3) - password in '...Hiding-From-You' - 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+
+Using the what I used above 'cat ./' with the complete command being 'cat ./...Hiding-From-You', finding hidden directories use the following command, 'ls -a' this will list all files and directories even if they're hidden.
+
+Level 5 (Bandit4) - password in '-file07' - 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+
+Used the following command 'cat./file' changing the number as the files are numbered from 00 - 09, until I found the password.
+
+        - MUST BE A QUICKER WAY TO FIND THE PASSWORD, FURTHER INVESTIGATION IS REQUIRED!
+
+Level 6 (Bandit5) - password in '/maybehere07/.file3' - HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+
+Used ls -la [directory name] E.G. 'ls -la maybehere07', listed all the files and found that the file had a byte size of 1033, not-executable.
+
+Level 7 (Bandit6) - morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+
+Using the command find and setting some set conditions I was able to find the right file based on group,user and size requirements
+
+the full command was " find / -type f -user bandit7 -group bandit 6 -size 33c 2>/dev/null "
+This command provided the exact path to the file - "/var/lib/dpkg/info/badnit7.password"
+using the "cd" command to the file and using the "cat" command - "cat bandit7.password" to retieve the password.
+
+Level 8 (Bandit7 -> 8) - password in data.txt - dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+
+Using the instructions I found the anwser using the "grep" command, next to the word Millionth would be the password. by entering the command "grep "millionth" data.txt" the command found the word millionth and it shown the password next to the word, the output being - "millionth dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc"
+
+Level 9(bandit8 -> 9) - password in data.txt 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+
+Using the instruction and reading through the helpful assistance material, I was able to read and use the "|" symbol to create the following command "grep -g data.txt | uniq -c data.txt" the output provided had sorted all the passwords in the file along with the amount of times it appeared in the file. The password above met the requirement of only appear once in the file.
+
+Level 10(bandit9 -> 10) - password in data.txt FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+
+This answer was not as straight-forward as the last challenge but I did find the password, using the command "grep -a "========" data.txt" this provided a number of outcomes with the password cearly viewed. Which had the password above
+
+Level 11(Bandit10 -> 11) - password in data.txt - dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+
+This answer was simple.
+data.txt holds a single line Base64 encoded string "VGhlIHBhc3N3b3JkIGlzIGR0UjE3M2ZaS2IwUlJzREZTR3NnMlJXbnBOVmozcVJyCg==". Next I used the following command "base64 -d data.txt" which provided the following outcome "The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr".
