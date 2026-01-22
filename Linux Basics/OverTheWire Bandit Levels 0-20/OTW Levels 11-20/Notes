@@ -7,3 +7,10 @@ the command "tr 'A-Za-z' 'N-ZA-Mn-za-m'" can also be used to decrypt ROT13 encry
 ROT13 Wikipedia Page - https://en.wikipedia.org/wiki/ROT13#Emacs_and_Vim
 
 
+Level 13 (Bandit12-13) password found in data9.bin - FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
+
+To get to the file, I had to use different decompressioning tools such as gzip, tar and bzip2. First I created the temp directory using "mktemp -d", once an output was produced I then created a copy and move that copy into the new directory. I then created another copy of the copied data.txt file, this newer copy name data.bin was used to as the starting point to find the password.
+
+using file to find the compression type, I kept compressing and redirecting using "gunzip < data8.bin > data9.bin" move the decompressed data into another file to continue decompressing, going from compresseed file types to POSIX tar Archive to finally ASCII text type, which had the completely decompressed answer.
+
+This one took me sometime to figure out, going online and understanding file type, loved this challenge. Onto the next one.
