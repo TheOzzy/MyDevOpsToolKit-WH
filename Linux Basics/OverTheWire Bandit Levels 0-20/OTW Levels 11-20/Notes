@@ -34,7 +34,7 @@ ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
 Now logged into bandit14, I used to directory path provided "/etc/bandit_pass/bandit14" and used the "cd" command to jump right into the directory where the password is kept. inside "bandit_pass" was the password.
 
 
-Level 15 (bandit14-15) password - 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQ
+Level 15 (bandit14-15) password - 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
 
 So far, the hardest challenge for me. the challenge was to find the password to the next level by entering the current password to port 30000 on localhost.
 
@@ -86,5 +86,50 @@ at this point anything with be outputted, you'll need to enter the password to b
 ""
 Correct!
 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+""
+
+
+Level 16 (bandit 15 - 16) - password - kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+
+Once I got onto "bandit15", I got to using the "nmap" command to see if port 30001 is open, I used the following command
+
+" nmap -p30001 -T4 -sV localhost "
+
+with the output being
+
+""
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-01-23 15:19 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00010s latency).
+
+PORT      STATE SERVICE             VERSION
+30001/tcp open  ssl/pago-services1?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port30001-TCP:V=7.94SVN%T=SSL%I=7%D=1/23%Time=69739181%P=x86_64-pc-linu
+SF:x-gnu%r(GenericLines,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x2
+SF:0current\x20password\.\n")%r(GetRequest,32,"Wrong!\x20Please\x20enter\x
+SF:20the\x20correct\x20current\x20password\.\n")%r(HTTPOptions,32,"Wrong!\
+SF:x20Please\x20enter\x20the\x20correct\x20current\x20password\.\n")%r(RTS
+SF:PRequest,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x20
+SF:password\.\n")%r(Help,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x
+SF:20current\x20password\.\n")%r(FourOhFourRequest,32,"Wrong!\x20Please\x2
+SF:0enter\x20the\x20correct\x20current\x20password\.\n")%r(LPDString,32,"W
+SF:rong!\x20Please\x20enter\x20the\x20correct\x20current\x20password\.\n")
+SF:%r(SIPOptions,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20curren
+SF:t\x20password\.\n");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 157.80 seconds
+""
+
+Next I used the following command, similar to what was used in the last level, but since has asked for me to use SSL/TLS encryption I had to adjust the command to accomodate the change. Below is the command I used
+
+" ncat --ssl localhost 30001 " - I then entered the current levels password as the argument.
+
+The output below was almost identical to what was outputted in the last level just with a different password.
+
+""
+Correct!
+kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
 ""
 
