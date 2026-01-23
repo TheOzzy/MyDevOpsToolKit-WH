@@ -15,7 +15,7 @@ using file to find the compression type, I kept compressing and redirecting usin
 
 This one took me sometime to figure out, going online and understanding file type, loved this challenge. Onto the next one.
 
-Level 14 (bandit13-14) - MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+Level 14 (bandit13-14)password - MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
 
 For this challenge, the password was stored in another server which could only be access by using a the given RSA Private Key.
 
@@ -26,9 +26,65 @@ Checking the file permissions, I noticed that the file permission were not set c
 I needed to get the private key on my local machine, to change the file permissions, I used the "scp" command which allowed me to securely copy the file over to my local machine. Full Command Below
 
 scp -P 2220 bandit13@bandit.labs.overthewire.org:/home/bandit13/sshkey.private .
-
+     
 Once I had the RSA Private Key locally downloaded all I needed was to log back into overthewire.org as "bandit14", using the "ssh" I appended the complete command and typed into the terminal the following.
 
 ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
 
 Now logged into bandit14, I used to directory path provided "/etc/bandit_pass/bandit14" and used the "cd" command to jump right into the directory where the password is kept. inside "bandit_pass" was the password.
+
+
+Level 15 (bandit14-15) password - 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQ
+
+So far, the hardest challenge for me. the challenge was to find the password to the next level by entering the current password to port 30000 on localhost.
+
+Firstly I had to see the status of the port and what services were running.
+
+I used the command "nmap" to scan for what was running on the network. for this challenge to access next levels password I need to accesss port 30000
+
+to do so I can narrow down my scan to "-p 30000", (using "-T4" to speed up the search), along with using the following command "-sV" to spot any running/open ports and finally ending the command using localhost to use network search on the current server. below is the complete command.
+
+" nmap -p30000 -T4 -sV localhost "
+
+It'll take sometime to find the port and complete the scan. with the following item being
+
+""
+
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-01-23 14:39 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000074s latency).
+
+PORT      STATE SERVICE VERSION
+30000/tcp open  ndmps?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port30000-TCP:V=7.94SVN%I=7%D=1/23%Time=69738811%P=x86_64-pc-linux-gnu%
+SF:r(GenericLines,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20curre
+SF:nt\x20password\.\n")%r(GetRequest,32,"Wrong!\x20Please\x20enter\x20the\
+SF:x20correct\x20current\x20password\.\n")%r(HTTPOptions,32,"Wrong!\x20Ple
+SF:ase\x20enter\x20the\x20correct\x20current\x20password\.\n")%r(RTSPReque
+SF:st,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x20passwo
+SF:rd\.\n")%r(Help,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20curr
+SF:ent\x20password\.\n")%r(FourOhFourRequest,32,"Wrong!\x20Please\x20enter
+SF:\x20the\x20correct\x20current\x20password\.\n")%r(LPDString,32,"Wrong!\
+SF:x20Please\x20enter\x20the\x20correct\x20current\x20password\.\n")%r(SIP
+SF:Options,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x20p
+SF:assword\.\n");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 112.49 seconds
+
+""
+
+With this output confirming the open port, next move onto accessing the port using the current password we have.
+
+using the command "nc" we can connect to localhost using port 30000 instead of the port to access bandit levels  (-p 2220). below is the next command
+
+" nc localhost 30000 "
+
+at this point anything with be outputted, you'll need to enter the password to bandit14, the current level. Once entered the following output is produced which includes the password to the next level.
+
+""
+Correct!
+8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+""
+
