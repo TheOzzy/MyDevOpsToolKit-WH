@@ -211,5 +211,8 @@ Since I couldn't access the server due to the .bashrc file I just used to "cat" 
 " ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme "
 
 The ourput being - cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+Level 20 (bandit19-20) - Password - 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
 
-Level 20
+To get to the password I used the following command.
+
+- "./bandit20-do cat /etc/bandit_pass/bandit20 "
