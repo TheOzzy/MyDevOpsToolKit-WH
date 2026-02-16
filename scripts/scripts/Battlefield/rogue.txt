@@ -1,0 +1,4 @@
+LINE 1 - This is Rogue class
+LINT 2 - Build : Lean, tall, dark
+LINE 3 - Pros: Lighting fast speed, powerful attack output, low cooldown rate.
+LINE 4 - Cons: Low HP, Can be spotted easily by mage class, cannot fight more than 1 player alone.

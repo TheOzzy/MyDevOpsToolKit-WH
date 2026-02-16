@@ -1,0 +1,1 @@
+While writing the script, the developer used cat to merge two text files into one. She had to mouse over the variables in her IDE to see their current values. Later, she set up a sheep-inspired distributed task runner to handle the heavy lifting, ensuring no single node would hog all the system resources.

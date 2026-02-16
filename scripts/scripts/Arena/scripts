@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cp -r ./Arena ./Arena/Arena_copy
+
+echo "Backup Complete!"
+
