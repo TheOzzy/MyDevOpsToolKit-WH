@@ -7,3 +7,213 @@ the command "tr 'A-Za-z' 'N-ZA-Mn-za-m'" can also be used to decrypt ROT13 encry
 ROT13 Wikipedia Page - https://en.wikipedia.org/wiki/ROT13#Emacs_and_Vim
 
 
+Level 13 (Bandit12-13) password found in data9.bin - FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn 
+
+To get to the file, I had to use different decompressioning tools such as gzip, tar and bzip2. First I created the temp directory using "mktemp -d", once an output was produced I then created a copy and move that copy into the new directory. I then created another copy of the copied data.txt file, this newer copy name data.bin was used to as the starting point to find the password.
+
+using file to find the compression type, I kept compressing and redirecting using "gunzip < data8.bin > data9.bin" move the decompressed data into another file to continue decompressing, going from compresseed file types to POSIX tar Archive to finally ASCII text type, which had the completely decompressed answer.
+
+This one took me sometime to figure out, going online and understanding file type, loved this challenge. Onto the next one.
+
+Level 14 (bandit13-14)password - MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+
+For this challenge, the password was stored in another server which could only be access by using a the given RSA Private Key.
+
+Using the private key to access "bandit14", will only then allow me to access the correct directory to find the password stored in "/etc/bandit_pass/bandit14"
+
+Checking the file permissions, I noticed that the file permission were not set correctly.
+
+I needed to get the private key on my local machine, to change the file permissions, I used the "scp" command which allowed me to securely copy the file over to my local machine. Full Command Below
+
+scp -P 2220 bandit13@bandit.labs.overthewire.org:/home/bandit13/sshkey.private .
+     
+Once I had the RSA Private Key locally downloaded all I needed was to log back into overthewire.org as "bandit14", using the "ssh" I appended the complete command and typed into the terminal the following.
+
+ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
+
+Now logged into bandit14, I used to directory path provided "/etc/bandit_pass/bandit14" and used the "cd" command to jump right into the directory where the password is kept. inside "bandit_pass" was the password.
+
+
+Level 15 (bandit14-15) password - 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+
+So far, the hardest challenge for me. the challenge was to find the password to the next level by entering the current password to port 30000 on localhost.
+
+Firstly I had to see the status of the port and what services were running.
+
+I used the command "nmap" to scan for what was running on the network. for this challenge to access next levels password I need to accesss port 30000
+
+to do so I can narrow down my scan to "-p 30000", (using "-T4" to speed up the search), along with using the following command "-sV" to spot any running/open ports and finally ending the command using localhost to use network search on the current server. below is the complete command.
+
+" nmap -p30000 -T4 -sV localhost "
+
+It'll take sometime to find the port and complete the scan. with the following item being
+
+""
+
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-01-23 14:39 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000074s latency).
+
+PORT      STATE SERVICE VERSION
+30000/tcp open  ndmps?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port30000-TCP:V=7.94SVN%I=7%D=1/23%Time=69738811%P=x86_64-pc-linux-gnu%
+SF:r(GenericLines,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20curre
+SF:nt\x20password\.\n")%r(GetRequest,32,"Wrong!\x20Please\x20enter\x20the\
+SF:x20correct\x20current\x20password\.\n")%r(HTTPOptions,32,"Wrong!\x20Ple
+SF:ase\x20enter\x20the\x20correct\x20current\x20password\.\n")%r(RTSPReque
+SF:st,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x20passwo
+SF:rd\.\n")%r(Help,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20curr
+SF:ent\x20password\.\n")%r(FourOhFourRequest,32,"Wrong!\x20Please\x20enter
+SF:\x20the\x20correct\x20current\x20password\.\n")%r(LPDString,32,"Wrong!\
+SF:x20Please\x20enter\x20the\x20correct\x20current\x20password\.\n")%r(SIP
+SF:Options,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x20p
+SF:assword\.\n");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 112.49 seconds
+
+""
+
+With this output confirming the open port, next move onto accessing the port using the current password we have.
+
+using the command "nc" we can connect to localhost using port 30000 instead of the port to access bandit levels  (-p 2220). below is the next command
+
+" nc localhost 30000 "
+
+at this point anything with be outputted, you'll need to enter the password to bandit14, the current level. Once entered the following output is produced which includes the password to the next level.
+
+""
+Correct!
+8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+""
+
+
+Level 16 (bandit 15 - 16) - password - kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+
+Once I got onto "bandit15", I got to using the "nmap" command to see if port 30001 is open, I used the following command
+
+" nmap -p30001 -T4 -sV localhost "
+
+with the output being
+
+""
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-01-23 15:19 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00010s latency).
+
+PORT      STATE SERVICE             VERSION
+30001/tcp open  ssl/pago-services1?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port30001-TCP:V=7.94SVN%T=SSL%I=7%D=1/23%Time=69739181%P=x86_64-pc-linu
+SF:x-gnu%r(GenericLines,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x2
+SF:0current\x20password\.\n")%r(GetRequest,32,"Wrong!\x20Please\x20enter\x
+SF:20the\x20correct\x20current\x20password\.\n")%r(HTTPOptions,32,"Wrong!\
+SF:x20Please\x20enter\x20the\x20correct\x20current\x20password\.\n")%r(RTS
+SF:PRequest,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20current\x20
+SF:password\.\n")%r(Help,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x
+SF:20current\x20password\.\n")%r(FourOhFourRequest,32,"Wrong!\x20Please\x2
+SF:0enter\x20the\x20correct\x20current\x20password\.\n")%r(LPDString,32,"W
+SF:rong!\x20Please\x20enter\x20the\x20correct\x20current\x20password\.\n")
+SF:%r(SIPOptions,32,"Wrong!\x20Please\x20enter\x20the\x20correct\x20curren
+SF:t\x20password\.\n");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 157.80 seconds
+""
+
+Next I used the following command, similar to what was used in the last level, but since has asked for me to use SSL/TLS encryption I had to adjust the command to accomodate the change. Below is the command I used
+
+" ncat --ssl localhost 30001 " - I then entered the current levels password as the argument.
+
+The output below was almost identical to what was outputted in the last level just with a different password.
+
+""
+Correct!
+    kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+""
+
+
+Level 17 (bandit16-17) - RSA Key (named key.private)
+
+Since the password was between two different ranges I scaned the network ports using "nmap" and made sure to set the range to only return ports that were within 31000 & 32000, below is the command I used
+
+" nmap -p 31000-32000 -T4 -sV localhost "
+
+With the output for the ports being.
+
+PORT      STATE SERVICE     VERSION
+31046/tcp open  echo
+31518/tcp open  ssl/echo
+31691/tcp open  echo
+31790/tcp open  ssl/unknown
+31960/tcp open  echo
+
+The ports had shown under the column service whether or not I could use the command "ssl", out of the 5 ports only 2 used the command. This narrow down my search. using the following command below I found the password to the next bandit level 
+
+" ncat --ssl localhost 31518 " - When I entered the current levels password the output had repeated what I had entered, the password of the current level.
+
+" ncat --ssl localhost 31798 " - I entered the password once again, it provide me with a RSA Private Key.
+
+I then copied the RSA Key manually, I'll provide the key below
+
+""
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----
+""
+
+With this key I saved the key in a file with the content inside and used the command I had used a few level backs.
+
+"ssh -i key.private bandit16"bandit.labssss.overthewire.org -p 2220"
+
+The key granted access to the next level
+
+*NOTE - MAKE SURE THE FILE YOU CREATE TO HOLD THE RSA PRIVATE KEY HAS IT'S FILE PERMISSIONS SET TO 600 USING "CHMOD 600"*
+
+
+Level 18 (bandit17-bandit18) - password - x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+
+Two files named passwords.old and passwords.new hold the password to the next level, I used the commands to find the difference between the two files and see if the difference is the password held.
+
+Through some research I came across the comand "vimdiff" which provided a side-by-side comparison of the two files and where they differed, I tested the different passwords that were held in password.old and password.new. the password below is what worked to move onto the next level.
+
+x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+
+Level 19 (bandit18-19) - password - cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+
+Since I couldn't access the server due to the .bashrc file I just used to "cat" command to output what was in the "readne" file holding the password.
+
+" ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme "
+
+The ourput being - cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+
+Level 20 (bandit19-20) - Password - 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+
+To get to the password I used the following command.
+
+- "./bandit20-do cat /etc/bandit_pass/bandit20 "
