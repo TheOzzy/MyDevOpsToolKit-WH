@@ -3,3 +3,4 @@
 ls --sort=size -l
 
 echo "Sorted smallest to largest in current dir"
+echo "Sort Completed"
