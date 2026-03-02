@@ -1,6 +1,7 @@
 #!/bin/bash
 
-FILE="./hero.txt"
+FILE="../NewArena/hero.txt"
+
 
 if [[ -f "$FILE" ]]; then
 	echo "Hero Found!"
