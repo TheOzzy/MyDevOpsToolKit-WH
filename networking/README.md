@@ -12,7 +12,7 @@ The project integrates three primary layers of web infrastructure:
 
 ## 🔗 Live Demo
 The project is live and accessible via the custom domain:  
-**Visit Website - http://www.fiftyfour.click**
+**Visit Website - www.fiftyfour.click**
 
 ## 🛠️ Tech Stack
 
