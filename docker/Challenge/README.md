@@ -144,24 +144,3 @@ Open <http://localhost:5002>.
 | Password | `my-secret-pw` (set in `docker-compose.yml`) |
 | Database | `mysql` |
 
----
-
-## Known limitations
-
-**Challenge**
-- `app.py` runs the Flask development server with `debug=True` — single-threaded and not production-safe
-- `redis-db` publishes `6379` to the host unnecessarily
-- Redis uses default RDB snapshots; add `--appendonly yes` to avoid losing writes on an ungraceful stop
-- `dockerfile` is lowercase — Docker looks for `Dockerfile`, so this may fail on case-sensitive filesystems
-- No `.dockerignore`; `__pycache__` is currently copied into the image
-
-**hello_flask**
-- `docker-compose.yml` uses `build:` with an image reference — `build:` expects a build context path, so this should be `build: .` (or `image:` if pulling a prebuilt image)
-- No volume on `newdb`, so the database is wiped whenever the container is recreated
-- Credentials hard-coded in `app.py` and `docker-compose.yml`
-- Connects as `root` to the internal `mysql` system database
-- `python:3.8-slim` base image is end-of-life
-- No retry on the initial DB connection; `depends_on` waits for the container to start, not for MySQL to accept connections
-
-**Both**
-- `version: '3.8'` is obsolete under Compose v2 and prints a warning; it can be deleted
