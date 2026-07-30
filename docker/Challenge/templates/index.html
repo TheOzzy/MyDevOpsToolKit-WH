@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Docker Challenge - Building a Multi-Container Application{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Hello, welcome to the homepage</h1>
+    <p>A simple Flask app backed by Redis, running in Docker. Track how many times the count page has been visited.</p>
+    <div class="actions">
+        <a href="/count" class="btn">View Count Page &rarr;</a>
+    </div>
+</div>
+{% endblock %}

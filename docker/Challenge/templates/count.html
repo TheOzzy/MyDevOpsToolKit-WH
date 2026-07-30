@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Docker Challenge - Building a Multi-Container Application{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Visit Counter</h1>
+    <p>This page tracks how many times it has been loaded, stored in Redis.</p>
+
+    <div class="stat">
+        {% if count is string %}
+        <span class="stat-value error">{{ count }}</span>
+        {% else %}
+        <span class="stat-value">{{ count }}</span>
+        <span class="stat-label">Total visits</span>
+        {% endif %}
+    </div>
+
+    <div class="actions">
+        <a href="/" class="btn btn-secondary">&larr; Back to Home</a>
+        <a href="/count" class="btn">Refresh Count</a>
+    </div>
+</div>
+{% endblock %}
