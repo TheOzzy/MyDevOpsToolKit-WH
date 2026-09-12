@@ -344,46 +344,6 @@ CloudWatch allows EC2 performance to be observed rather than relying only on man
 
 ---
 
-# Final Architecture
-
-```text
-                        INTERNET
-                            |
-                            v
-                  +-------------------+
-                  |   Public Subnet   |
-                  |                   |
-                  |   Bastion EC2     |
-                  |   <BASTION_SG>    |
-                  |   <IAM_ROLE_NAME> |
-                  +---------+---------+
-                            |
-                            | SSH TCP/22
-                            |
-                            v
-                  +-------------------+
-                  |  Private Subnet   |
-                  |                   |
-                  |   Private EC2     |
-                  |   <PRIVATE_SG>    |
-                  |   No Public IP    |
-                  +---------+---------+
-                            |
-                            | EC2 Metrics
-                            v
-                  +-------------------+
-                  | Amazon CloudWatch |
-                  |                   |
-                  | CPUUtilization    |
-                  | Network Metrics   |
-                  | Status Checks     |
-                  |                   |
-                  | CPU Alarm > 70%   |
-                  +-------------------+
-```
-
----
-
 # What I Learned
 
 This lab provided practical experience with:
