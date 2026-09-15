@@ -25,36 +25,6 @@ The project also helped reinforce AWS networking concepts including:
 
 ![AWS Application Load Balancer with Two EC2 Instances](media/Adobe%20Express%20-%200915.gif)
 
-```mermaid
-flowchart TD
-    User[Internet User]
-
-    IGW[Internet Gateway]
-
-    ALB[Application Load Balancer<br/>HTTP : 80]
-
-    TG[Target Group<br/>Health Check: /]
-
-    subgraph VPC["VPC - 10.0.0.0/24"]
-
-        subgraph AZA["Availability Zone A"]
-            PUBA["Public Subnet A<br/>10.0.0.0/27"]
-            EC2A["EC2 Instance 1<br/>Python Web Server<br/>Port 80"]
-        end
-
-        subgraph AZB["Availability Zone B"]
-            PUBB["Public Subnet B<br/>10.0.0.32/27"]
-            EC2B["EC2 Instance 2<br/>Python Web Server<br/>Port 80"]
-        end
-
-        ALB --> TG
-        TG --> EC2A
-        TG --> EC2B
-    end
-
-    User -->|HTTP| IGW
-    IGW --> ALB
-```
 
 > The EC2 instances were placed in separate Availability Zones to improve resilience.  
 > For this learning lab, the instances were launched in public subnets so that software could be installed easily, but their Security Group prevents direct HTTP access from the internet.
