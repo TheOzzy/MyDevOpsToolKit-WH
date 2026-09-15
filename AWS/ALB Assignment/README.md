@@ -301,110 +301,22 @@ This demonstrated that requests were being distributed between the two registere
 
 ---
 
-## Demo
-
-A GIF can be added here to demonstrate the load balancer switching between both instances:
-
-```md
-![ALB Load Balancing Demo](docs/alb-demo.gif)
-```
-
-Recommended repository structure:
-
-```text
-.
-├── README.md
-├── docs/
-│   ├── architecture.png
-│   └── alb-demo.gif
-└── app/
-    ├── instance-1.py
-    └── instance-2.py
-```
-
----
-
 # Troubleshooting and Lessons Learned
 
-A large part of this lab involved troubleshooting the architecture rather than simply creating resources.
+During the lab, I encountered a few issues that helped reinforce how AWS networking and Security Groups work together.
 
-## ALB VPC was unavailable
+| Issue | Cause | Fix |
+|---|---|---|
+| ALB VPC unavailable | No Internet Gateway attached to the VPC | Created and attached an Internet Gateway |
+| Public subnet warning | Route Table only had the local VPC route | Added `0.0.0.0/0 -> Internet Gateway` |
+| EC2 could not download packages | EC2 Security Group had no outbound rule | Restored outbound internet access |
+| Target Group health checks timed out | ALB was attached to the wrong Security Group | Attached the correct ALB Security Group |
 
-When creating the ALB, the custom VPC initially appeared unavailable.
+One of the main lessons from this project was understanding the difference between **routing** and **permissions**:
 
-### Cause
+> Route Tables determine where traffic can go, while Security Groups determine whether that traffic is allowed.
 
-The VPC did not have an Internet Gateway attached.
-
-### Fix
-
-An Internet Gateway was created and attached to the VPC.
-
----
-
-## Public subnet warning
-
-The ALB reported that the selected subnets did not have an Internet Gateway route.
-
-### Cause
-
-The Route Table only contained the local VPC route.
-
-### Fix
-
-The following route was added:
-
-```text
-0.0.0.0/0 -> Internet Gateway
-```
-
----
-
-## EC2 instances could not download packages
-
-Package installation initially failed.
-
-### Cause
-
-The EC2 Security Group had no outbound rule.
-
-### Fix
-
-Outbound connectivity was restored so the instance could initiate connections to the internet.
-
-This reinforced an important concept:
-
-> A route provides the network path, while the Security Group determines whether traffic is permitted.
-
----
-
-## Target Group showed "Request timed out"
-
-Both EC2 targets initially appeared as unhealthy even though the web application worked with:
-
-```bash
-curl localhost
-```
-
-### Cause
-
-The Application Load Balancer had been attached to the wrong Security Group.
-
-The EC2 Security Group allowed HTTP from the intended ALB Security Group, but the ALB was actually using a different Security Group.
-
-### Fix
-
-The correct ALB Security Group was attached to the Application Load Balancer.
-
-After the next health checks completed, both targets changed to:
-
-```text
-Healthy
-```
-
-This was one of the most useful lessons from the project because it demonstrated how Security Groups can reference other Security Groups instead of relying on IP addresses.
-
----
+I also learned how Security Groups can reference other Security Groups, allowing the EC2 instances to accept HTTP traffic only from the ALB rather than directly from the internet.
 
 # Key Concepts Learned
 
