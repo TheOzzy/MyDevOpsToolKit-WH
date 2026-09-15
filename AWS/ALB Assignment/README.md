@@ -21,7 +21,7 @@ The project also helped reinforce AWS networking concepts including:
 
 ---
 
-## Architecture
+## Video Demostration
 
 ![AWS Application Load Balancer with Two EC2 Instances](media/Adobe%20Express%20-%200915.gif)
 
