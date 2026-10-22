@@ -1,4 +1,9 @@
-resource "aws_instance" "this" {
-  ami                     = "ami-0e5df6fd7455a69b3"
-  instance_type           = "t2.micro"
+resource "aws_instance" "tf-import" {
+  ami                     = "ami-0567589d25e06853e"
+  instance_type           = "t3.micro"
+
+  tags = {
+    "Name" = "tf-import"
+  }
+
 }
