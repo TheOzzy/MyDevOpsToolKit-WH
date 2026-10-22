@@ -1,0 +1,19 @@
+# Key Value Pairs
+name: foo bar
+age: 25
+job: Developer
+
+#List
+skills:
+  - Python
+  - JavaScript
+  - Terraform
+
+
+# Nested Key Value Pairs
+address:
+  street: 123 Main St
+  city: London
+  county: LON
+  postcode: NW1 6XE
+
