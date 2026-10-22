@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: check code#
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v4
       - name: We are testing the new CI/CD workflow
         run: echo "Hello World"
